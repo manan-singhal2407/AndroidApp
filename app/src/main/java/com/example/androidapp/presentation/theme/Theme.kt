@@ -1,4 +1,4 @@
-package com.example.androidapp.ui.theme
+package com.example.androidapp.presentation.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -19,7 +19,7 @@ private val LightColorPalette = lightColorScheme(
 )
 
 @Composable
-fun AndroidAppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+fun AppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     MaterialTheme(
         colorScheme = if (darkTheme) DarkColorPalette else LightColorPalette,
         typography = AppTypography,

@@ -98,7 +98,6 @@ android {
         implementation(Google.hiltAndroid)
         implementation(platform(Google.googleServicesBom))
 
-        implementation(Firebase.auth)
         implementation(Firebase.analytics)
 
         implementation(ThirdParty.coil)
@@ -126,19 +125,6 @@ android {
 
         implementation(Google.playInstallReferrer)
         implementation(Google.playCore)
-
-        // TESTING
-        testImplementation(UnitTest.jupiterApi)
-        testImplementation(UnitTest.junitPlatformSuiteEngine)
-        testRuntimeOnly(UnitTest.jupiterEngine)
-        testImplementation(UnitTest.mockk)
-
-        // Mock web server
-        testImplementation(UnitTest.mockWebServer)
-        // testImplementation(UnitTest.okHttp) // include this if you get issues
-
-        // compose testing
-        implementation(InstrumentationTest.composeUi)
     }
 }
 

@@ -10,10 +10,7 @@ object Versions {
     const val kotlin = "1.7.0"
     const val hilt = "2.43"
     const val junit5 = "1.8.2.1"
-    const val googleServices = "4.3.10"
     const val googleServicesBom = "30.1.0"
-    const val googleAdsServices = "21.1.0"
-    const val firebaseCrashlytics = "2.9.0"
 
     const val coreKtx = "1.7.0"
     const val appCompat = "1.4.1"
@@ -34,8 +31,6 @@ object Versions {
     const val leakCanary = "2.8.1"
     const val room = "2.4.2"
     const val junitJupiter = "5.8.2"
-    const val junitJupiterSuite = "1.8.2"
-    const val mockk = "1.12.4"
     const val datastore = "1.0.0"
     const val coil = "2.0.0-rc02"
     const val logging = "4.9.3"
@@ -47,8 +42,5 @@ object Versions {
     const val pager = "0.24.12-rc"
     const val sqlCipher = "4.5.0"
     const val installReferrer = "2.2"
-    const val rudderstack = "1.6.1"
-    const val cleverTap = "4.6.0"
     const val playCore = "1.10.3"
-    const val avoInspector = "2.0.3"
 }
