@@ -1,0 +1,9 @@
+# true (recommended) / false
+root = true
+
+[*.{kt, kts}]
+indent_size = 4
+insert_final_newline = false
+trim_trailing_whitespace = true
+ij_groovy_use_single_class_imports = true
+max_line_length = 120
