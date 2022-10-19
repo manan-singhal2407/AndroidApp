@@ -31,6 +31,8 @@ object Versions {
     const val leakCanary = "2.8.1"
     const val room = "2.4.2"
     const val junitJupiter = "5.8.2"
+    const val junitJupiterSuite = "1.8.2"
+    const val mockk = "1.12.4"
     const val datastore = "1.0.0"
     const val coil = "2.0.0-rc02"
     const val logging = "4.9.3"

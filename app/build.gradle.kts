@@ -125,6 +125,19 @@ android {
 
         implementation(Google.playInstallReferrer)
         implementation(Google.playCore)
+
+        // TESTING
+        testImplementation(UnitTest.jupiterApi)
+        testImplementation(UnitTest.junitPlatformSuiteEngine)
+        testRuntimeOnly(UnitTest.jupiterEngine)
+        testImplementation(UnitTest.mockk)
+
+        // Mock web server
+        testImplementation(UnitTest.mockWebServer)
+        // testimplementation (UnitTest.okHttp // include this if you get issues
+
+        // compose testing
+        implementation(InstrumentationTest.composeUi)
     }
 }
 

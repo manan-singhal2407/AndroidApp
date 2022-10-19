@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import com.example.androidapp.R
 
-private val QuickSand = FontFamily(
+val QuickSand = FontFamily(
     Font(R.font.quicksand_light, FontWeight.W300),
     Font(R.font.quicksand_regular, FontWeight.W400),
     Font(R.font.quicksand_medium, FontWeight.W500),
