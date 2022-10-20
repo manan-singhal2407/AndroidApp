@@ -1,8 +1,9 @@
-@file:Suppress("MagicNumber")
+@file:Suppress("MagicNumber", "MaxLineLength")
 
 package com.example.androidapp.presentation.screen.home
 
 import android.content.Context
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,12 +18,17 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -35,14 +41,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.androidapp.R
@@ -54,41 +66,46 @@ import com.example.androidapp.presentation.theme.atom.TextInput
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
+import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalPagerApi::class, ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(viewModel: HomeViewModel) {
     val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+    val focusManager = LocalFocusManager.current
+    val bringIntoViewRequester = BringIntoViewRequester()
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black)
+            .background(Color(0xFFF6F6F6))
+            .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = Modifier.height(12.dp))
-        Image(
-            modifier = Modifier
-                .width(120.dp)
-                .height(52.dp)
-                .clip(RoundedCornerShape(12.dp)),
-            drawable = R.drawable.ic_launcher_background,
-            contentScale = ContentScale.FillBounds
-        )
+        Row(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Spacer(modifier = Modifier.width(12.dp))
+            Image(
+                modifier = Modifier
+                    .width(120.dp)
+                    .height(52.dp)
+                    .clip(RoundedCornerShape(12.dp)),
+                url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQubC0CZ1a7H-enaPa0fIzC19FdJXvbWF-jiB7ORTUPnXEBrJcREQbLgtvA0CxAbF4j5Tg&usqp=CAU",
+                contentScale = ContentScale.FillBounds
+            )
+        }
         Spacer(modifier = Modifier.height(12.dp))
         val state = rememberPagerState()
-        val slideImage = remember { mutableStateOf(R.drawable.ic_launcher_background) }
-        HorizontalPager(count = 3, state = state) { page ->
+        val slideImage = remember { mutableStateOf("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCqdcuWve6iluHQpaRLcjSEvzijhYyrFfZzcb5YiKgqL1Lk-MLDdBA7Xzz1O8JsnNIHTA&usqp=CAU") }
+        HorizontalPager(count = 2, state = state) { page ->
             when (page) {
-
                 0 -> {
-                    slideImage.value = R.drawable.ic_launcher_background
+                    slideImage.value = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCqdcuWve6iluHQpaRLcjSEvzijhYyrFfZzcb5YiKgqL1Lk-MLDdBA7Xzz1O8JsnNIHTA&usqp=CAU"
                 }
-
                 1 -> {
-                    slideImage.value = R.drawable.ic_launcher_background
-                }
-
-                2 -> {
-                    slideImage.value = R.drawable.ic_launcher_background
+                    slideImage.value = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQubC0CZ1a7H-enaPa0fIzC19FdJXvbWF-jiB7ORTUPnXEBrJcREQbLgtvA0CxAbF4j5Tg&usqp=CAU"
                 }
             }
 
@@ -96,27 +113,27 @@ fun HomeScreen(viewModel: HomeViewModel) {
                 Image(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(160.dp)
+                        .height(200.dp)
                         .padding(horizontal = 20.dp)
                         .clip(RoundedCornerShape(12.dp)),
-                    drawable = slideImage.value
+                    url = slideImage.value,
+                    contentScale = ContentScale.FillBounds
                 )
             }
         }
 
-        Spacer(modifier = Modifier.padding(4.dp))
-
+        Spacer(modifier = Modifier.height(8.dp))
         DotsIndicator(
-            totalDots = 3,
-            selectedIndex = state.currentPage,
-            selectedColor = Color(0xFFFC8403),
-            unSelectedColor = Color(0xFFE6E6E6)
+            totalDots = 2,
+            selectedIndex = state.currentPage
         )
+        Spacer(modifier = Modifier.height(8.dp))
 
         Card(
             modifier = Modifier
                 .fillMaxSize()
-                .clip(RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)),
+                .heightIn(min = LocalConfiguration.current.screenHeightDp.dp - 304.dp)
+                .clip(RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp)),
             colors = CardDefaults.cardColors(
                 containerColor = Color.White
             )
@@ -173,14 +190,30 @@ fun HomeScreen(viewModel: HomeViewModel) {
             TextInput(
                 hint = "example@gmail.com",
                 onTextChange = { viewModel.email.value = it },
-                modifier = Modifier.padding(start = 24.dp, end = 72.dp)
+                modifier = Modifier
+                    .padding(start = 24.dp, end = 72.dp)
+                    .onFocusChanged { event ->
+                        if (event.isFocused) {
+                            coroutineScope.launch {
+                                bringIntoViewRequester.bringIntoView()
+                            }
+                        }
+                    },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Email,
+                    imeAction = ImeAction.Done
+                ),
+                keyboardActions = KeyboardActions(
+                    onDone = { focusManager.clearFocus() }
+                ),
             )
             Spacer(modifier = Modifier.height(24.dp))
             PrimaryButton(
                 label = "Continue(2/2)",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
+                    .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
+                    .bringIntoViewRequester(bringIntoViewRequester),
                 onClick = { viewModel.saveUserData(context = context) },
                 enabled = !viewModel.savingData.value
             )
@@ -189,34 +222,24 @@ fun HomeScreen(viewModel: HomeViewModel) {
 }
 
 @Composable
-fun DotsIndicator(
-    totalDots: Int,
-    selectedIndex: Int,
-    selectedColor: Color,
-    unSelectedColor: Color,
-) {
-
+fun DotsIndicator(totalDots: Int, selectedIndex: Int) {
     LazyRow(
-        modifier = Modifier
-            .wrapContentWidth()
-            .wrapContentHeight()
-
+        modifier = Modifier.wrapContentSize()
     ) {
-
         items(totalDots) { index ->
             if (index == selectedIndex) {
                 Box(
                     modifier = Modifier
-                        .size(5.dp)
+                        .size(12.dp)
                         .clip(CircleShape)
-                        .background(selectedColor)
+                        .background(Color.White)
                 )
             } else {
                 Box(
                     modifier = Modifier
-                        .size(5.dp)
+                        .size(12.dp)
                         .clip(CircleShape)
-                        .background(unSelectedColor)
+                        .background(Color.Gray)
                 )
             }
 

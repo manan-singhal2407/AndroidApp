@@ -3,6 +3,7 @@ package com.example.androidapp.presentation.theme.atom
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
@@ -18,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.androidapp.presentation.theme.QuickSand
@@ -28,7 +28,9 @@ import com.example.androidapp.presentation.theme.QuickSand
 fun TextInput(
     hint: String,
     onTextChange: (String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default
 ) {
     Surface(
         modifier = modifier
@@ -45,9 +47,8 @@ fun TextInput(
                 inputText = it
                 onTextChange(inputText)
             },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Email
-            ),
+            keyboardOptions = keyboardOptions,
+            keyboardActions = keyboardActions,
             placeholder = {
                 Text(
                     text = hint,
