@@ -10,9 +10,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import com.example.androidapp.presentation.theme.Primary10
 import com.example.androidapp.presentation.theme.Primary60
+import com.example.androidapp.presentation.theme.QuickSand
+import com.example.androidapp.presentation.theme.elevation4dp
+import com.example.androidapp.presentation.theme.height40dp
+import com.example.androidapp.presentation.theme.padding24dp
+import com.example.androidapp.presentation.theme.padding8dp
+import com.example.androidapp.presentation.theme.radius12dp
 
 @Composable
 fun PrimaryButton(
@@ -23,26 +28,27 @@ fun PrimaryButton(
 ) {
     OutlinedButton(
         onClick = onClick,
-        modifier = modifier.heightIn(40.dp),
+        modifier = modifier.heightIn(height40dp),
         enabled = enabled,
         contentPadding = PaddingValues(
-            horizontal = 24.dp,
-            vertical = 8.dp
+            horizontal = padding24dp,
+            vertical = padding8dp
         ),
         border = null,
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(radius12dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = Primary10,
             disabledContainerColor = Primary60,
         ),
         elevation = ButtonDefaults.buttonElevation(
-            defaultElevation = 4.dp
+            defaultElevation = elevation4dp
         )
     ) {
         Text(
             text = label,
             style = MaterialTheme.typography.titleSmall,
-            color = Color.White
+            color = Color.White,
+            fontFamily = QuickSand
         )
     }
 }

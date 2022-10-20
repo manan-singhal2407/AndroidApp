@@ -19,9 +19,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.androidapp.presentation.theme.QuickSand
+import com.example.androidapp.presentation.theme.elevation12dp
+import com.example.androidapp.presentation.theme.radius12dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,8 +37,8 @@ fun TextInput(
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight(),
-        shape = RoundedCornerShape(12.dp),
-        shadowElevation = 12.dp
+        shape = RoundedCornerShape(radius12dp),
+        shadowElevation = elevation12dp
     ) {
         var inputText by remember { mutableStateOf("") }
         TextField(
@@ -53,7 +54,8 @@ fun TextInput(
                 Text(
                     text = hint,
                     color = Color.LightGray,
-                    fontSize = 13.sp
+                    fontSize = 13.sp,
+                    fontFamily = QuickSand
                 )
             },
             textStyle = TextStyle(

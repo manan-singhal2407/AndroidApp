@@ -1,4 +1,4 @@
-@file:Suppress("MagicNumber", "MaxLineLength")
+@file:Suppress("MagicNumber")
 
 package com.example.androidapp.presentation.screen.home
 
@@ -52,12 +52,14 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.androidapp.R
+import com.example.androidapp.presentation.theme.BackgroundColor
 import com.example.androidapp.presentation.theme.Primary10
 import com.example.androidapp.presentation.theme.QuickSand
 import com.example.androidapp.presentation.theme.atom.Image
@@ -78,7 +80,7 @@ fun HomeScreen(viewModel: HomeViewModel) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF6F6F6))
+            .background(BackgroundColor)
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -92,20 +94,21 @@ fun HomeScreen(viewModel: HomeViewModel) {
                     .width(120.dp)
                     .height(52.dp)
                     .clip(RoundedCornerShape(12.dp)),
-                url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQubC0CZ1a7H-enaPa0fIzC19FdJXvbWF-jiB7ORTUPnXEBrJcREQbLgtvA0CxAbF4j5Tg&usqp=CAU",
+                url = stringResource(id = R.string.image2),
                 contentScale = ContentScale.FillBounds
             )
         }
         Spacer(modifier = Modifier.height(12.dp))
         val state = rememberPagerState()
-        val slideImage = remember { mutableStateOf("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCqdcuWve6iluHQpaRLcjSEvzijhYyrFfZzcb5YiKgqL1Lk-MLDdBA7Xzz1O8JsnNIHTA&usqp=CAU") }
+        val image = stringResource(id = R.string.image1)
+        val slideImage = remember { mutableStateOf(image) }
         HorizontalPager(count = 2, state = state) { page ->
             when (page) {
                 0 -> {
-                    slideImage.value = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCqdcuWve6iluHQpaRLcjSEvzijhYyrFfZzcb5YiKgqL1Lk-MLDdBA7Xzz1O8JsnNIHTA&usqp=CAU"
+                    slideImage.value = stringResource(id = R.string.image1)
                 }
                 1 -> {
-                    slideImage.value = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQubC0CZ1a7H-enaPa0fIzC19FdJXvbWF-jiB7ORTUPnXEBrJcREQbLgtvA0CxAbF4j5Tg&usqp=CAU"
+                    slideImage.value = stringResource(id = R.string.image2)
                 }
             }
 

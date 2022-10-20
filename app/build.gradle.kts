@@ -78,8 +78,6 @@ android {
         implementation(AndroidX.appCompat)
         implementation(AndroidX.constraintLayout)
         implementation(AndroidX.uiTooling)
-        implementation(AndroidX.navFragmentKtx) // will remove later
-        implementation(AndroidX.navUiKtx) // will remove later
         implementation(AndroidX.composeUi)
         implementation(AndroidX.composeUtil)
         implementation(AndroidX.composeFoundation)
@@ -91,18 +89,12 @@ android {
         implementation(AndroidX.navigationCompose)
         implementation(AndroidX.hiltNavigationCompose)
         implementation(AndroidX.composeActivity)
-        implementation(AndroidX.roomRuntime)
-        implementation(AndroidX.roomKtx)
-        implementation(AndroidX.datastore)
         implementation(AndroidX.paging)
-        implementation(Google.hiltAndroid)
-        implementation(platform(Google.googleServicesBom))
 
-        implementation(Firebase.analytics)
+        implementation(Google.hiltAndroid)
 
         implementation(ThirdParty.coil)
         implementation(ThirdParty.timber)
-        implementation(ThirdParty.lottie)
         implementation(ThirdParty.sqlCipher)
 
         implementation(Jetbrains.kotlinStdlib)
@@ -120,23 +112,12 @@ android {
         detektPlugins(DetektPlugin.compose)
 
         kapt(AnnotationProcessing.hiltCompiler)
-        kapt(AnnotationProcessing.roomCompiler)
         kapt(AnnotationProcessing.moshiAnnotationProcessor)
-
-        implementation(Google.playInstallReferrer)
-        implementation(Google.playCore)
 
         // TESTING
         testImplementation(UnitTest.jupiterApi)
         testImplementation(UnitTest.junitPlatformSuiteEngine)
         testRuntimeOnly(UnitTest.jupiterEngine)
-        testImplementation(UnitTest.mockk)
-
-        // Mock web server
-        testImplementation(UnitTest.mockWebServer)
-        // testimplementation (UnitTest.okHttp // include this if you get issues
-
-        // compose testing
         implementation(InstrumentationTest.composeUi)
     }
 }
