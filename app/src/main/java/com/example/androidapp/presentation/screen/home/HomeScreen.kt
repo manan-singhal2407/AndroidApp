@@ -68,6 +68,7 @@ import com.example.androidapp.presentation.theme.atom.TextInput
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class, ExperimentalFoundationApi::class)
@@ -198,6 +199,7 @@ fun HomeScreen(viewModel: HomeViewModel) {
                     .onFocusChanged { event ->
                         if (event.isFocused) {
                             coroutineScope.launch {
+                                delay(500)
                                 bringIntoViewRequester.bringIntoView()
                             }
                         }
